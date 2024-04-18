@@ -24,9 +24,9 @@
     $resultado = $mysqli->query($canciones);
 
     while ($fila = $resultado->fetch_object()){
-       echo "<tr>";
-       echo "<td><img src=" . $fila->enlace_imagen . " width='40' height='40'/></td>";
-       echo "<td><a class='menu' href='Pagina_Cancion.php?idcanciones=" . $fila->id_episodio . "'>" . $fila->descripcionepisodio . " </a></td>";
+       echo "<tr style=''>";
+       echo "<td><img src=" . $fila->enlace_imagen . " width='100' height='100'/></td>";
+       echo "<td><a class='menu' href='Pagina_Episodio.php?idepisodio=" . $fila->id_episodio . "' style='display:block; width:80%; margin-left: 2em;'>" . $fila->descripcionepisodio . " </a></td>";
 
        echo "<td><b>" . $fila->duracion . "</b></td>";
 
