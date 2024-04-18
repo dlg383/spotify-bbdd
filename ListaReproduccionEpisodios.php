@@ -18,17 +18,17 @@
     if ($publica) { echo "<p style='font-size:30px; '><b>Lista pública de Reproducción</b></p>";} else {echo "<p style='font-size:30px; '><b>Lista privada de Reproducción</b></p>";}
     echo "<p style='font-size:20px; '><b>". $nombre ."</b></p>";
 
-    $canciones = "SELECT *,can.titulo as titulocancion FROM canciones as can INNER JOIN canciones_de_listas as lista INNER JOIN albumes as alb WHERE
-    lista.listasdereproduccioncanciones_idlistasdereproduccioncanciones='$idlista'
-    and can.idcanciones = lista.canciones_idcanciones and can.albumes_idalbumes = alb.idalbumes";
+    $canciones = "SELECT *,epi.descripcion as descripcionepisodio FROM episodio as epi INNER JOIN lista_reproduccion_episodios_tiene_episodio as lista INNER JOIN podcast as pod WHERE
+    lista.id_lista_rep_episodios='$idlista'
+    and epi.id_episodio = lista.id_episodio and epi.id_podcast = pod.id_podcast";
     $resultado = $mysqli->query($canciones);
 
     while ($fila = $resultado->fetch_object()){
        echo "<tr>";
-       echo "<td><img src=" . $fila->imagendeportada . " width='40' height='40'/></td>";
-       echo "<td><a class='menu' href='Pagina_Cancion.php?idcanciones=" . $fila->idcanciones . "'>" . $fila->titulocancion . " </a></td>";
+       echo "<td><img src=" . $fila->enlace_imagen . " width='40' height='40'/></td>";
+       echo "<td><a class='menu' href='Pagina_Cancion.php?idcanciones=" . $fila->id_episodio . "'>" . $fila->descripcionepisodio . " </a></td>";
 
-       echo "<td><b>" . $fila->minutos . ":" . $fila->segundos . "</b></td>";
+       echo "<td><b>" . $fila->duracion . "</b></td>";
 
        echo "</tr>";
 

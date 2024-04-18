@@ -14,7 +14,7 @@
 	$id = $_SESSION['id'];
 
 
-	$listascanciones = "SELECT * FROM listasdereproduccioncanciones WHERE usuarios_idusuarios='$id'";
+	$listascanciones = "SELECT * FROM lista_reproduccion_canciones WHERE id_usuario='$id'";
 	$resultado = $mysqli->query($listascanciones);
 	if ($resultado->num_rows>0){
 		echo "<hr>";
@@ -22,7 +22,7 @@
   echo "<p style='font-size:30px; '><b> Tus listas de reproducción de canciones </b></p>";
   while ($fila = $resultado->fetch_object()){
 		echo "<div class='row'>";
-		echo "<a class='menu' href='ListaReproduccionCanciones.php?idlista=" . $fila->idlistasdereproduccioncanciones . "&nombre=". $fila->nombre ."&publica=". $fila->publica . "'>
+		echo "<a class='menu' href='ListaReproduccionCanciones.php?idlista=" . $fila->id_lista_rep_canciones . "&nombre=". $fila->nombre ."&publica=". $fila->publica . "'>
 			 												<p>" . $fila->nombre .  "</p></a>";
 		echo "</div>";
   }
@@ -31,7 +31,7 @@
 	echo "</div>";
 
 
-  $listasepisodios = "SELECT * FROM listasdereproduccionepisodios WHERE usuarios_idusuarios='$id'";
+  $listasepisodios = "SELECT * FROM lista_reproduccion_episodios WHERE id_usuario='$id'";
 	$resultado2 = $mysqli->query($listasepisodios);
 	if ($resultado->num_rows>0){
 		echo "<hr>";
@@ -39,7 +39,7 @@
   echo "<p style='font-size:30px; '><b> Tus listas de reproducción de episodios </b></p>";
   while ($fila2 = $resultado2->fetch_object()){
 		echo "<div class='row'>";
-	  echo "<a class='menu' href='ListaReproduccionEpisodios.php?idlista=" . $fila2->idlistasdereproduccionpodcasts . "&nombre=". $fila2->nombre ."&publica=". $fila2->publica . "'>
+	  echo "<a class='menu' href='ListaReproduccionEpisodios.php?idlista=" . $fila2->id_lista_rep_episodios . "&nombre=". $fila2->nombre ."&publica=". $fila2->publica . "'>
 															<p>" . $fila2->nombre .  "</p></a>";
 		echo "</div>";
   }

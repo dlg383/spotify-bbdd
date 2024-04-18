@@ -18,7 +18,7 @@
 			session_start();
 			$_SESSION['login'] = $login;
 			$_SESSION['password'] = $password;
-			$_SESSION['id'] = $fila->idusuarios;
+			$_SESSION['id'] = $fila->id_usuario;
 			$_SESSION['type'] = 'usuario';
       $_SESSION['loggedin'] = true;
 			header("Location:Inicio_Usuario.php");
@@ -31,7 +31,7 @@
 				session_start();
 				$_SESSION['login'] = $login;
 				$_SESSION['password'] = $password;
-				$_SESSION['id'] = $fila->idadministradores;
+				$_SESSION['id'] = $fila->id_admin;
 				$_SESSION['type'] = 'administrador';
 	      $_SESSION['loggedin'] = true;
 				header("Location:Inicio_Administrador.php");
@@ -44,7 +44,7 @@
 					session_start();
 					$_SESSION['login'] = $login;
 					$_SESSION['password'] = $password;
-					$_SESSION['id'] = $fila->idartistas;
+					$_SESSION['id'] = $fila->id_artistas;
 					$_SESSION['type'] = 'artista';
 					$_SESSION['loggedin'] = true;
 					header("Location:Inicio_Artista.php");
@@ -57,7 +57,7 @@
 					session_start();
 					$_SESSION['login'] = $login;
 					$_SESSION['password'] = $password;
-					$_SESSION['id'] = $fila->idpodcast;
+					$_SESSION['id'] = $fila->id_podcast;
 					$_SESSION['type'] = 'podcast';
 					$_SESSION['loggedin'] = true;
 					header("Location:Inicio_PodCast.php");
