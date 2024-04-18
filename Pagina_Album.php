@@ -13,7 +13,7 @@
 
   $idalbumes = $_GET['idalbumes'];
 
-  $album = "SELECT * FROM albumes as alb INNER JOIN artistas as art WHERE idalbumes='$idalbumes' and alb.artistas_idartistas = art.idartistas";
+  $album = "SELECT * FROM album as alb INNER JOIN artista as art WHERE id_album='$idalbumes' and alb.id_artista = art.id_artistas";
 	$resultado = $mysqli->query($album);
 
 		$fila = $resultado->fetch_object();
@@ -21,19 +21,19 @@
     echo "<br/>";
 
     echo "<div>";
-    echo "<img src=" . $fila->imagendeportada ." width='100%' height='500'/>";
+    echo "<img src=" . $fila->imagen_portada ." width='250px' height='250px style='justify-self:center'/>";
 	 	echo "<p style='font-size:50px; '><b>" . $fila->titulo .  "</b></p>";
     echo "<p><b> " . $fila->nombre .  "</b></p>";
-    echo "<a class='menu' href='Pagina_Artista.php?idartistas=" . $fila->idartistas . "'> <img src=" . $fila->imagen ." width='10%' height='10%'/></a>";
-		echo "<p><b> Año de Publicación: " . $fila->anodepublicacion .  "</b></p>";
+    echo "<a class='menu' href='Pagina_Artista.php?idartistas=" . $fila->id_artista . "'> <img src=" . $fila->imagen ." width='10%' height='10%'/></a>";
+		echo "<p><b> Año de Publicación: " . $fila->ano_publicacion .  "</b></p>";
 
 		if ($_SESSION['type'] == 'artista'){
-	  echo "<a href='NuevaCancion.php?idalbumes=". $fila->idalbumes . "' class='menu'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nueva Canción</button></a><br/>";
+	  echo "<a href='NuevaCancion.php?idalbumes=". $fila->id_album . "' class='menu'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nueva Canción</button></a><br/>";
 	  }
 		echo "</div>";
 
 
-  $listascanciones = "SELECT * FROM canciones WHERE albumes_idalbumes='$idalbumes'";
+  $listascanciones = "SELECT * FROM cancion WHERE id_album='$idalbumes'";
 	$resultado2 = $mysqli->query($listascanciones);
   if ($resultado2->num_rows>0){
   echo "<hr/>";
@@ -43,8 +43,8 @@
   while ($fila2 = $resultado2->fetch_object()){
      echo "<tr>";
      echo "<td>". $count . ".</td>";
-     echo "<td><a class='menu' href='Pagina_Cancion.php?idcanciones=" . $fila2->idcanciones . "'> <p><b>" . $fila2->titulo .  "</b></p></a></td>";
-     echo "<td><b>" . $fila2->minutos .  ":" . $fila2->segundos .  "</b></td>";
+     echo "<td><a class='menu' href='Pagina_Cancion.php?idcanciones=" . $fila2->id_cancion . "'> <p><b>" . $fila2->titulo .  "</b></p></a></td>";
+     echo "<td><b>" . $fila2->duracion_min .  ":" . $fila2->duracion_seg .  "</b></td>";
      echo "</tr>";
 
      $count = $count +1;

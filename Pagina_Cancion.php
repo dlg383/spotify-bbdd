@@ -12,44 +12,44 @@
   session_start();
 
    $id = $_SESSION['id'];
-   $cancion = "SELECT * FROM canciones WHERE idcanciones='$idcanciones'";
+   $cancion = "SELECT * FROM cancion WHERE id_cancion='$idcanciones'";
    $resultado = $mysqli->query($cancion);
    $fila = $resultado->fetch_object();
-   echo "<div>";
+   echo "<div style='margin-top:10px'>";
 
-   echo "<iframe style='border-radius:12px'
-   src='" . $fila->enlaceaspotify ."'
-   width='100%' height='352' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>";
+   echo "<iframe style='border-radius:12px; height:300px;'
+   src='" . $fila->enlace_spotify ."'
+   width='100%'; frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>";
 
-   echo "<p><b> Número de reproducciones: " . $fila->numerodereproduciones .  "</b></p>";
-    echo "<p><b> Duración: " . $fila->minutos . ":" . $fila->segundos .  "</b></p>";
+   echo "<p><b> Número de reproducciones: " . $fila->num_reproducciones .  "</b></p>";
+    echo "<p><b> Duración: " . $fila->duracion_min . ":" . $fila->duracion_seg .  "</b></p>";
 
    if ($_SESSION['type'] == 'usuario'){
    echo "<a href='ScriptMeGustaCancion.php' class='menu'><button style='width:100%; background-color:green;color:white;'>Me Gusta</button></a><br/>";
 
    echo "<form action='ScriptAnadirListaCanciones.php' method='post' class=formulario>";
- 	 $listas = "SELECT * FROM listasdereproduccioncanciones WHERE usuarios_idusuarios='$id'";
+ 	 $listas = "SELECT * FROM lista_reproduccion_canciones WHERE id_usuario='$id'";
  	 $resultado2 = $mysqli->query($listas);
    echo "<input type='submit' style='width:100%; background-color:green;color:white;' value='Añadir a una lista de reproducción'>";
    echo "<select name='idlista' style='width:100%;'>";
  	 while ($fila2 = $resultado2->fetch_object()) {
-    echo "<option style='background-color: white; color: black;'  value='" . $fila2->idlistasdereproduccioncanciones . "'>" . $fila2->nombre . "</option>";
+    echo "<option style='background-color: white; color: black;'  value='" . $fila2->id_lista_rep_canciones . "'>" . $fila2->nombre . "</option>";
    }
    echo "</select>";
-   echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $idcanciones . "' />";
+   echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $id_cancion . "' />";
  	 echo "</form>";
  }
  if ($_SESSION['type'] == 'administrador'){
 	echo "<form action='ScriptAnadirRecopilacionCanciones.php' method='post' class=formulario>";
- 	$recopilaciones = "SELECT * FROM recopilacionesdecanciones WHERE administradores_idadministradores='$id'";
+ 	$recopilaciones = "SELECT * FROM recopilacion_canciones WHERE id_admin='$id'";
  	$resultado2 = $mysqli->query($recopilaciones);
  	echo "<input type='submit' style='width:100%; background-color:green;color:white;' value='Añadir a una recopilación'>";
  	echo "<select name='idlista' style='width:100%;'>";
  	while ($fila2 = $resultado2->fetch_object()) {
- 	 echo "<option style='background-color: white; color: black;'  value='" . $fila2->idrecopilacionsdecanciones . "'>" . $fila2->nombre . "</option>";
+ 	 echo "<option style='background-color: white; color: black;'  value='" . $fila2->id_recopilacion_canciones . "'>" . $fila2->nombre . "</option>";
  	}
  	echo "</select>";
- 	echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $idcanciones . "' />";
+ 	echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $id_cancion . "' />";
  	echo "</form>";
 }
 
@@ -59,9 +59,9 @@
 
 
 
-   $recopilaciones = "SELECT * FROM recopilacionesdecanciones as rec  WHERE EXISTS (SELECT * FROM canciones_de_recopilatorios as rcan
-     WHERE rcan.canciones_idcanciones = '$idcanciones'
-     and rcan.recopilacionesdecanciones_idrecopilacionesdecanciones = rec.idrecopilacionesdecanciones)";
+   $recopilaciones = "SELECT * FROM recopilacion_canciones as rec  WHERE EXISTS (SELECT * FROM recopilacion_canciones_tiene_cancion as rcan
+     WHERE rcan.id_cancion = '$idcanciones'
+     and rcan.id_recopilacion_canciones = rec.id_recopilacion_canciones)";
 
    $resultado4 = $mysqli->query($recopilaciones);
    if ($resultado4->num_rows>0){
@@ -77,9 +77,9 @@
    }
 
 
-   $recopilaciones = "SELECT * FROM listasdereproduccioncanciones as rec  WHERE EXISTS (SELECT * FROM canciones_de_listas as rcan
-     WHERE rcan.canciones_idcanciones = '$idcanciones'
-     and rcan.listasdereproduccioncanciones_idlistasdereproduccioncanciones = rec.idlistasdereproduccioncanciones)";
+   $recopilaciones = "SELECT * FROM lista_reproduccion_canciones as rec  WHERE EXISTS (SELECT * FROM lista_reproduccion_canciones_tiene_cancion as rcan
+     WHERE rcan.id_cancion = '$idcanciones'
+     and rcan.id_lista_rep_canciones = rec.id_lista_rep_canciones)";
 
    $resultado5 = $mysqli->query($recopilaciones);
    if ($resultado5->num_rows>0){
@@ -87,7 +87,7 @@
      echo "<p style='font-size:30px; '><b>Listas de reproducción en las que aparece</b></p>";
      while ($fila5 = $resultado5->fetch_object()) {
      echo "<div class='column' style='margin: 20pt;'>";
-     echo "<a class='menu' href='ListaReproduccionCanciones.php?idlista=" . $fila5->idlistasdereproduccioncanciones . "&nombre=". $fila5->nombre ."&publica=". $fila5->publica . "'>
+     echo "<a class='menu' href='ListaReproduccionCanciones.php?idlista=" . $fila5->id_lista_rep_canciones . "&nombre=". $fila5->nombre ."&publica=". $fila5->publica . "'>
  			 												<p>" . $fila5->nombre .  "</p></a>";
      echo "</div>";
      }
@@ -95,7 +95,7 @@
      }
 
 
-		 $gustas = "SELECT * FROM usuarios as usu INNER JOIN usuarios_me_gusta_canciones as mg WHERE mg.usuarios_idusuarios = usu.idusuarios and mg.canciones_idcanciones='$idcanciones'";
+		 $gustas = "SELECT * FROM usuario as usu INNER JOIN usuario_likes_cancion as mg WHERE mg.id_usuario = usu.id_usuario and mg.id_cancion='$idcanciones'";
 
 	   $resultado6 = $mysqli->query($gustas);
 	   if ($resultado6->num_rows>0){
