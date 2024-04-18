@@ -15,11 +15,11 @@
    $cancion = "SELECT * FROM cancion WHERE id_cancion='$idcanciones'";
    $resultado = $mysqli->query($cancion);
    $fila = $resultado->fetch_object();
-   echo "<div>";
+   echo "<div style='margin-top:10px'>";
 
-   echo "<iframe style='border-radius:12px'
+   echo "<iframe style='border-radius:12px; height:300px;'
    src='" . $fila->enlace_spotify ."'
-   width='100%' height='352' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>";
+   width='100%'; frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>";
 
    echo "<p><b> Número de reproducciones: " . $fila->num_reproducciones .  "</b></p>";
     echo "<p><b> Duración: " . $fila->duracion_min . ":" . $fila->duracion_seg .  "</b></p>";
@@ -36,7 +36,7 @@
     echo "<option style='background-color: white; color: black;'  value='" . $fila2->id_lista_rep_canciones . "'>" . $fila2->nombre . "</option>";
    }
    echo "</select>";
-   echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $idcanciones . "' />";
+   echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $id_cancion . "' />";
  	 echo "</form>";
  }
  if ($_SESSION['type'] == 'administrador'){
@@ -49,7 +49,7 @@
  	 echo "<option style='background-color: white; color: black;'  value='" . $fila2->id_recopilacion_canciones . "'>" . $fila2->nombre . "</option>";
  	}
  	echo "</select>";
- 	echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $idcanciones . "' />";
+ 	echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $id_cancion . "' />";
  	echo "</form>";
 }
 
