@@ -36,7 +36,7 @@
     echo "<option style='background-color: white; color: black;'  value='" . $fila2->id_lista_rep_canciones . "'>" . $fila2->nombre . "</option>";
    }
    echo "</select>";
-   echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $id_cancion . "' />";
+   echo "<input type='hidden' name='idcancion' style='width:300%; background-color:red;color:white;' value='" . $idcanciones . "' />";
  	 echo "</form>";
  }
  if ($_SESSION['type'] == 'administrador'){

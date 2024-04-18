@@ -12,7 +12,7 @@
   session_start();
   $idusuarios = $_SESSION['id'];
 	$idartistas = $_GET['idartistas'];
-  $artista = "SELECT * FROM artistas WHERE idartistas='$idartistas'";
+  $artista = "SELECT * FROM artista WHERE id_artistas='$idartistas'";
 	$resultado = $mysqli->query($artista);
 
 		$fila = $resultado->fetch_object();
@@ -22,15 +22,15 @@
     echo "<img src=" . $fila->imagen ." width='100%' height='500'/>";
 	 	echo "<p style='font-size:50px; '><b>" . $fila->nombre .  "</b></p>";
 		echo "<p><b> Descripción: " . $fila->descripcion .  "</b></p>";
-    echo "<p><b> Número de reproducciones: " . $fila->numerodereproducciones .  "</b></p>";
+    echo "<p><b> Número de reproducciones: " . $fila->num_reproducciones .  "</b></p>";
 
-		$tematica = "SELECT * FROM tematica WHERE idtematica='$fila->tematica_idtematica'";
+		$tematica = "SELECT * FROM tematica WHERE id_tematica='$fila->id_tematica'";
 		$resultadot = $mysqli->query($tematica);
 	  $filat = $resultadot->fetch_object();
 		echo "<p><b> Temática: " . $filat->nombre .  "</b></p>";
 
 
-		$seguimiento = "SELECT * FROM artistas_seguidos WHERE artistas_idartistas='$idartistas' and usuarios_idusuarios='$idusuarios'";
+		$seguimiento = "SELECT * FROM usuario_sigue_artista WHERE id_artistas='$idartistas' and id_usuario='$idusuarios'";
 		$seguido = $mysqli->query($seguimiento);
 		if ($seguido->num_rows==0){
 		echo "<a href='ScriptSeguimiento.php?usuario=" . $idusuarios . "&artista=" . $idartistas . "' class='menu'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Seguir</button></a><br/>";
@@ -40,8 +40,8 @@
 
 
 
-  $canciones = "SELECT *, can.titulo as titulocancion FROM canciones as can INNER JOIN albumes as alb WHERE alb.artistas_idartistas = '$idartistas'
-  and can.albumes_idalbumes = alb.idalbumes ORDER BY can.numerodereproduciones";
+  $canciones = "SELECT *, can.titulo as titulocancion FROM cancion as can INNER JOIN album as alb WHERE alb.id_artista = '$idartistas'
+  and can.id_album = alb.id_album ORDER BY can.num_reproducciones";
   $resultado2 = $mysqli->query($canciones);
   $count = 1;
   if ($resultado2->num_rows>0){
@@ -51,9 +51,9 @@
     while ($fila2 = $resultado2->fetch_object() and $count<=5) {
 		echo "<tr>";
 		echo "<td>". $count . ".</td>";
-		echo "<td><img src=" . $fila2->imagendeportada . " width='40' height='40'/></td>";
-		echo "<td><a class='menu' href='Pagina_Cancion.php?idcanciones=" . $fila2->idcanciones . "'>" . $fila2->titulocancion . " </a></td>";
-		echo "<td><b>" . $fila2->minutos . ":" . $fila2->segundos . "</b></td>";
+		echo "<td><img src=" . $fila2->imagen_portada . " width='40' height='40'/></td>";
+		echo "<td><a class='menu' href='Pagina_Cancion.php?idcanciones=" . $fila2->id_cancion . "'>" . $fila2->titulo . " </a></td>";
+		echo "<td><b>" . $fila2->duracion_min . ":" . $fila2->duracion_seg . "</b></td>";
 		echo "</tr>";
     $count = $count +1;
 	}
@@ -61,7 +61,7 @@
   }
 
 
-  $albumes = "SELECT * FROM albumes WHERE artistas_idartistas = '$idartistas'";
+  $albumes = "SELECT * FROM album WHERE id_artista = '$idartistas'";
   $resultado3 = $mysqli->query($albumes);
   if ($resultado3->num_rows>0){
 		echo "<hr>";
@@ -69,24 +69,24 @@
 	  echo "<p style='font-size:30px; '><b>Álbumes</b></p>";
     while ($fila3 = $resultado3->fetch_object()) {
   	echo "<div class='column' style='margin: 20pt;'>";
-		echo "<a class='menu' href='Pagina_Album.php?idalbumes=" . $fila3->idalbumes . "'> <img src=" . $fila3->imagendeportada ." width='200' height='200'/></a>";
+		echo "<a class='menu' href='Pagina_Album.php?idalbumes=" . $fila3->id_album . "'> <img src=" . $fila3->imagen_portada ." width='200' height='200'/></a>";
 	 	echo "<p><b>" . $fila3->titulo .  "</b></p>";
-		echo "<p><b> Año de Publicación: " . $fila3->anodepublicacion .  "</b></p>";
+		echo "<p><b> Año de Publicación: " . $fila3->ano_publicacion .  "</b></p>";
     echo "</div>";
 	}
 	echo "<div>";
   }
 
 
-  $recopilaciones = "SELECT * FROM recopilacionesdecanciones as rec  WHERE EXISTS (SELECT * FROM canciones_de_recopilatorios as rcan
-    INNER JOIN canciones as can
-    INNER JOIN albumes as alb
-    INNER JOIN artistas as art
-    WHERE art.idartistas = '$idartistas'
-    and alb.artistas_idartistas = art.idartistas
-    and can.albumes_idalbumes = alb.idalbumes
-    and rcan.canciones_idcanciones = can.idcanciones
-    and rcan.recopilacionesdecanciones_idrecopilacionesdecanciones = rec.idrecopilacionesdecanciones)";
+  $recopilaciones = "SELECT * FROM recopilacion_canciones as rec  WHERE EXISTS (SELECT * FROM recopilacion_canciones_tiene_cancion as rcan
+    INNER JOIN cancion as can
+    INNER JOIN album as alb
+    INNER JOIN artista as art
+    WHERE art.id_artistas = '$idartistas'
+    and alb.id_artista = art.id_artistas
+    and can.id_album = alb.id_album
+    and rcan.id_cancion = can.id_cancion
+    and rcan.id_recopilacion_canciones = rec.id_recopilacion_canciones)";
 
   $resultado4 = $mysqli->query($recopilaciones);
   if ($resultado4->num_rows>0){
@@ -103,15 +103,15 @@
   }
 
 
-  $listas = "SELECT * FROM listasdereproduccioncanciones as rec  WHERE EXISTS (SELECT * FROM canciones_de_listas as rcan
-    INNER JOIN canciones as can
-    INNER JOIN albumes as alb
-    INNER JOIN artistas as art
-    WHERE art.idartistas = '$idartistas'
-    and alb.artistas_idartistas = art.idartistas
-    and can.albumes_idalbumes = alb.idalbumes
-    and rcan.canciones_idcanciones = can.idcanciones
-    and rcan.listasdereproduccioncanciones_idlistasdereproduccioncanciones = rec.idlistasdereproduccioncanciones)";
+  $listas = "SELECT * FROM lista_reproduccion_canciones as rec  WHERE EXISTS (SELECT * FROM lista_reproduccion_canciones_tiene_cancion as rcan
+    INNER JOIN cancion as can
+    INNER JOIN album as alb
+    INNER JOIN artista as art
+    WHERE art.id_artistas = '$idartistas'
+    and alb.id_artista = art.id_artistas
+    and can.id_album = alb.id_album
+    and rcan.id_cancion = can.id_cancion
+    and rcan.id_lista_rep_canciones = rec.id_lista_rep_canciones)";
 
   $resultado5 = $mysqli->query($listas);
   if ($resultado5->num_rows>0){
@@ -120,7 +120,7 @@
 	  echo "<p style='font-size:30px; '><b>Listas de reproducción en las que aparece</b></p>";
     while ($fila5 = $resultado5->fetch_object()) {
   	echo "<div class='column' style='margin: 20pt;'>";
-		echo "<a class='menu' href='ListaReproduccionCanciones.php?idlista=" . $fila5->idlistasdereproduccioncanciones . "&nombre=". $fila5->nombre ."&publica=". $fila5->publica . "'>
+		echo "<a class='menu' href='ListaReproduccionCanciones.php?idlista=" . $fila5->id_lista_rep_canciones . "&nombre=". $fila5->nombre ."&publica=". $fila5->publica . "'>
 														 <p>" . $fila5->nombre .  "</p></a>";
     echo "</div>";
 	}
@@ -128,7 +128,7 @@
   }
 
 
-  $seguidores = "SELECT * FROM usuarios as usu INNER JOIN artistas_seguidos as seg WHERE seg.usuarios_idusuarios = usu.idusuarios and seg.artistas_idartistas='$idartistas'";
+  $seguidores = "SELECT * FROM usuario as usu INNER JOIN usuario_sigue_artista as seg WHERE seg.id_usuario = usu.id_usuario and seg.id_artistas='$idartistas'";
 
   $resultado6 = $mysqli->query($seguidores);
   if ($resultado6->num_rows>0){
