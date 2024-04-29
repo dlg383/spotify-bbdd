@@ -82,8 +82,30 @@
 	  echo "<p style='font-size:30px; '><b>Listas de reproducción en las que aparece</b></p>";
     while ($fila5 = $resultado5->fetch_object()) {
   	echo "<div class='column' style='margin: 20pt;'>";
-		echo "<a class='menu' href='ListaReproduccionEpisodio.php?idlista=" . $fila5->id_lista_rep_episodios . "&nombre=". $fila5->nombre ."&publica=". $fila5->publica . "'>
+		echo "<a class='menu' href='ListaReproduccionEpisodios.php?idlista=" . $fila5->id_lista_rep_episodios . "&nombre=". $fila5->nombre ."&publica=". $fila5->publica . "'>
 														 <p>" . $fila5->nombre .  "</p></a>";
+    echo "</div>";
+	}
+	echo "<div>";
+  }
+
+  $recopilaciones = "SELECT * FROM recopilacion_episodios as rec  WHERE EXISTS (SELECT * FROM recopilacion_episodios_tiene_episodio as repi
+    INNER JOIN episodio as epi
+    INNER JOIN podcast as pod
+    WHERE pod.id_podcast = '$idpodcast'
+    and epi.id_podcast = pod.id_podcast
+    and repi.id_episodio = epi.id_episodio
+    and repi.id_recopilacion_episodios = rec.id_recopilacion_episodios)";
+
+  $resultado4 = $mysqli->query($recopilaciones);
+  if ($resultado4->num_rows>0){
+		echo "<hr>";
+		echo "<div>";
+		echo "<p style='font-size:30px; '><b>Recopilaciones en las que aparece</b></p>";
+    while ($fila4 = $resultado4->fetch_object()) {
+  	echo "<div class='column' style='margin: 20pt;'>";
+    echo "<a class='menu' href='RecopilacionEpisodios.php?idrecopilacion=" . $fila4->id_recopilacion_episodios .  "&nombre=" . $fila4->nombre . "'> <img src=" . $fila4->imagen ." width='200' height='200'/></a>";
+	 	echo "<p><b>" . $fila4->nombre .  "</b></p>";
     echo "</div>";
 	}
 	echo "<div>";

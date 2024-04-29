@@ -52,7 +52,7 @@
 		echo "<tr>";
 		echo "<td>". $count . ".</td>";
 		echo "<td><img src=" . $fila2->imagen_portada . " width='40' height='40'/></td>";
-		echo "<td><a class='menu' href='Pagina_Cancion.php?idcanciones=" . $fila2->id_cancion . "'>" . $fila2->titulo . " </a></td>";
+		echo "<td><a class='menu' href='Pagina_Cancion.php?idcanciones=" . $fila2->id_cancion . "'>" . $fila2->titulocancion . " </a></td>";
 		echo "<td><b>" . $fila2->duracion_min . ":" . $fila2->duracion_seg . "</b></td>";
 		echo "</tr>";
     $count = $count +1;
@@ -95,7 +95,7 @@
 		echo "<p style='font-size:30px; '><b>Recopilaciones en las que aparece</b></p>";
     while ($fila4 = $resultado4->fetch_object()) {
   	echo "<div class='column' style='margin: 20pt;'>";
-    echo "<img src=" . $fila4->imagen ." width='200' height='200'/>";
+    echo "<a class='menu' href='RecopilacionCanciones.php?idrecopilacion=" . $fila4->id_recopilacion_canciones .  "&nombre=" . $fila4->nombre . "'> <img src=" . $fila4->imagen ." width='200' height='200'/></a>";
 	 	echo "<p><b>" . $fila4->nombre .  "</b></p>";
     echo "</div>";
 	}
