@@ -69,7 +69,7 @@
      echo "<p style='font-size:30px; '><b>Recopilaciones en las que aparece</b></p>";
      while ($fila4 = $resultado4->fetch_object()) {
    	echo "<div class='column' style='margin: 20pt;'>";
-    echo "<a class='menu' href='RecopilacionCanciones.php?idrecopilacion=" . $fila4->id_recopilacion_canciones .  "&nombre=". $fila4->nombre ."'> <img src=" . $fila4->imagen ." width='200' height='200'/></a>";
+    echo "<a class='menu' href='RecopilacionCanciones.php?idrecopilacion=" . $fila4->id_recopilacion_canciones .  "&nombre=" . $fila4->nombre . "'> <img src=" . $fila4->imagen ." width='200' height='200'/></a>";
  	 	echo "<p><b>" . $fila4->nombre .  "</b></p>";
      echo "</div>";
  	}

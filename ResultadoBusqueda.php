@@ -50,6 +50,21 @@
 		echo "</table>";
 	}
 
+	$bpodcast = "SELECT * FROM podcast WHERE titulo LIKE '%$busqueda%'";
+	$rpodcast = $mysqli->query($bpodcast);
+	if ($rpodcast->num_rows>0){
+		echo "<hr>";
+		echo "<p style='font-size:30px; '><b>Albumes</b></p>";
+		echo "<table style='width:100%'>";
+		while ($fila = $rpodcast->fetch_object()) {
+			echo "<tr>";
+			echo "<td><img src=" . $fila->enlace_imagen . " width='40' height='40'/></td>";
+			echo "<td><a class='menu' href='Pagina_Podcast.php?idpodcast=" . $fila->id_podcast . "'><b>" . $fila->titulo . "</b></a></td>";
+		}
+		echo "</table>";
+	}
+
+
 	$blistasdereproduccioncanciones = "SELECT * FROM lista_reproduccion_canciones WHERE nombre LIKE '%$busqueda%' and publica";
 	$rlistasdereproduccioncanciones = $mysqli->query($blistasdereproduccioncanciones);
 	if ($rlistasdereproduccioncanciones->num_rows>0){
