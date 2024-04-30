@@ -54,7 +54,7 @@
 	$rpodcast = $mysqli->query($bpodcast);
 	if ($rpodcast->num_rows>0){
 		echo "<hr>";
-		echo "<p style='font-size:30px; '><b>Albumes</b></p>";
+		echo "<p style='font-size:30px; '><b>Podcast</b></p>";
 		echo "<table style='width:100%'>";
 		while ($fila = $rpodcast->fetch_object()) {
 			echo "<tr>";
@@ -79,6 +79,49 @@
 		}
 		echo "</table>";
 	}
+
+	$blistasdereproduccionepisodios = "SELECT * FROM lista_reproduccion_episodios WHERE nombre LIKE '%$busqueda%' and publica";
+	$rlistasdereproduccionepisodios = $mysqli->query($blistasdereproduccionepisodios);
+	if ($rlistasdereproduccionepisodios->num_rows>0){
+		echo "<hr>";
+		echo "<p style='font-size:30px; '><b>Listas de reproducción de episodios</b></p>";
+		echo "<table style='width:100%'>";
+		while ($fila = $rlistasdereproduccionepisodios->fetch_object()) {
+			echo "<tr>";
+			echo "<td><a class='menu' href='ListaReproduccionEpisodios.php?idlista=" .
+			$fila->id_lista_rep_canciones . "&nombre=" . $fila->nombre . "&publica=" . $fila->publica . "'><b>" . $fila->nombre . "</b></a></td>";
+		}
+		echo "</table>";
+	}
+
+	$brecopilacioncanciones = "SELECT * FROM recopilacion_canciones WHERE nombre LIKE '%$busqueda%'";
+	$rrecopilacioncanciones = $mysqli->query($brecopilacioncanciones);
+	if ($rrecopilacioncanciones->num_rows>0){
+		echo "<hr>";
+		echo "<p style='font-size:30px; '><b>Recopilaciones de canciones</b></p>";
+		echo "<table style='width:100%'>";
+		while ($fila = $rrecopilacioncanciones->fetch_object()) {
+			echo "<tr>";
+			echo "<td><a class='menu' href='RecopilacionCanciones.php?idrecopilacion=" .
+			$fila->id_recopilacion_canciones . "&nombre=" . $fila->nombre . "'><b>" . $fila->nombre . "</b></a></td>";
+		}
+		echo "</table>";
+	}
+
+	$brecopilacionepisodios = "SELECT * FROM recopilacion_episodios WHERE nombre LIKE '%$busqueda%'";
+	$rrecopilacionepisodios = $mysqli->query($brecopilacionepisodios);
+	if ($rrecopilacionepisodios->num_rows>0){
+		echo "<hr>";
+		echo "<p style='font-size:30px; '><b>Recopilaciones de episodios</b></p>";
+		echo "<table style='width:100%'>";
+		while ($fila = $rrecopilacionepisodios->fetch_object()) {
+			echo "<tr>";
+			echo "<td><a class='menu' href='RecopilacionEpisodios.php?idrecopilacion=" .
+			$fila->id_recopilacion_episodios . "&nombre=" . $fila->nombre . "'><b>" . $fila->nombre . "</b></a></td>";
+		}
+		echo "</table>";
+	}
+
 	$busuarios = "SELECT * FROM usuario WHERE nick LIKE '%$busqueda%'";
 	$rusuarios = $mysqli->query($busuarios);
 	if ($rusuarios->num_rows>0){
