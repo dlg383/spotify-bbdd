@@ -59,7 +59,7 @@
 		echo "<p style='font-size:30px; '><b>Podcasts que sigues</b></p>";
  		while ($fila3 = $resultado3->fetch_object()) {
 			echo "<div class='column' style='margin: 20pt;'>";
-			echo "<img src=" . $fila3->enlace_imagen . " width='200' height='200'/>" ;
+			echo "<a class='menu' href='Pagina_Podcast.php?idpodcast=" . $fila3->id_podcast . "'> <img width='200' height='200' src='". $fila3->enlace_imagen ."'></img></a>";
 			echo "<p>" . $fila3->titulo . "</p>";
 			echo "</div>";
  		}
@@ -95,7 +95,7 @@
 		echo "<p style='font-size:30px; '><b>Episodios que te gustan</b></p>";
  		while ($fila5 = $resultado5->fetch_object()) {
 			echo "<div class='column' style='margin: 20pt;'>";
-	 		echo "<img src=" . $fila5->enlace_imagen . " width='200' height='200'/>" ;
+			echo "<a class='menu' href='Pagina_Episodio.php?idepisodio=" . $fila5->id_episodio . "'> <img width='200' height='200' src='". $fila5->enlace_imagen ."'></img></a>";
 	 		echo "<p style='max-width: 150pt; overflow: hidden;'>" . $fila5->descripcion . "</p>";
 	 		echo "</div>";
  		}

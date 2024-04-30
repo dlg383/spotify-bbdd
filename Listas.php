@@ -33,7 +33,7 @@
 
   $listasepisodios = "SELECT * FROM lista_reproduccion_episodios WHERE id_usuario='$id'";
 	$resultado2 = $mysqli->query($listasepisodios);
-	if ($resultado->num_rows>0){
+	if ($resultado2->num_rows>0){
 		echo "<hr>";
   echo "<div>";
   echo "<p style='font-size:30px; '><b> Tus listas de reproducción de episodios </b></p>";
