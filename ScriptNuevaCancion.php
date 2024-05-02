@@ -12,10 +12,10 @@
   $minutos = $_POST['minutos'];
   $segundos = $_POST['segundos'];
   $idalbumes = $_POST['idalbumes'];
-  $resultado = $mysqli->query("SELECT MAX(idcanciones) as maximo FROM canciones");
+  $resultado = $mysqli->query("SELECT MAX(id_cancion) as maximo FROM cancion");
   $fila = $resultado->fetch_object();
   $newId = $fila->maximo + 1;
-  $cadenaSQL = "INSERT INTO canciones(idcanciones,titulo,enlaceaspotify,numerodereproduciones,minutos,segundos,albumes_idalbumes)
+  $cadenaSQL = "INSERT INTO cancion(id_cancion,titulo,enlace_spotify,num_reproducciones,duracion_min,duracion_seg,id_album)
               VALUES ('$newId','$titulo','$enlaceaspotify','0','$minutos','$segundos','$idalbumes')";
   $mysqli->query($cadenaSQL);
   header("Location: Pagina_Album.php?idalbumes=". $idalbumes);
