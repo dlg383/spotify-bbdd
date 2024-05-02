@@ -83,7 +83,7 @@
   }
 
 
-	echo "<a href='NuevaAlbum.php?idartista=". $idartistas . "' class='menu'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nuevo Album</button></a><br/>";
+	echo "<a href='NuevoAlbum.php?idartista=". $idartistas . "' class='menu'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nuevo Album</button></a><br/>";
 
 
 
