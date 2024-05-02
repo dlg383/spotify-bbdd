@@ -36,10 +36,10 @@
 	if ($resultado2->num_rows>0){
 		echo "<hr>";
   echo "<div>";
-  echo "<p style='font-size:30px; '><b> Tus listas de reproducción de episodios </b></p>";
+  echo "<p style='font-size:30px; '><b> Tus recopilaciones de episodios </b></p>";
   while ($fila2 = $resultado2->fetch_object()){
 		echo "<div class='row'>";
-	  echo "<a class='menu' href='ListaReproduccionEpisodios.php?idlista=" . $fila2->id_recopilacion_episodios . "&nombre=". $fila2->nombre ."'>
+	  echo "<a class='menu' href='RecopilacionEpisodios.php?idrecopilacion=" . $fila2->id_recopilacion_episodios . "&nombre=". $fila2->nombre ."'>
 															<p>" . $fila2->nombre .  "</p></a>";
 		echo "</div>";
   }
