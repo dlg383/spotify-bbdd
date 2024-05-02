@@ -25,7 +25,7 @@
     echo "<p><b> Duración: " . $fila->duracion . "</b></p>";
 
    if ($_SESSION['type'] == 'usuario'){
-   echo "<a href='ScriptMeGustaEpisodio.php' class='menu'><button style='width:100%; background-color:green;color:white;'>Me Gusta</button></a><br/>";
+   echo "<a href='ScriptMeGustaEpisodio.php?idusuario=" . $id ."&idepisodio=" . $idepisodio . "' class='menu'><button style='width:100%; background-color:green;color:white;'>Me Gusta</button></a><br/>";
 
    echo "<form action='ScriptAnadirListaEpisodios.php' method='post' class=formulario>";
  	 $listas = "SELECT * FROM lista_reproduccion_episodios WHERE id_usuario='$id'";
