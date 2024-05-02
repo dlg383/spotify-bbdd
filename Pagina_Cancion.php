@@ -25,7 +25,7 @@
     echo "<p><b> Duración: " . $fila->duracion_min . ":" . $fila->duracion_seg .  "</b></p>";
 
    if ($_SESSION['type'] == 'usuario'){
-   echo "<a href='ScriptMeGustaCancion.php' class='menu'><button style='width:100%; background-color:green;color:white;'>Me Gusta</button></a><br/>";
+   echo "<a href='ScriptMeGustaCancion.php?idusuario=" . $id ."&idcancion=" . $idcanciones . "' class='menu'><button style='width:100%; background-color:green;color:white;'>Me Gusta</button></a><br/>";
 
    echo "<form action='ScriptAnadirListaCanciones.php' method='post' class=formulario>";
  	 $listas = "SELECT * FROM lista_reproduccion_canciones WHERE id_usuario='$id'";
