@@ -9,11 +9,6 @@
 
 <body>
 
-	<?php
-	include_once('Conexion.php');
-	session_start();
-	?>
-
 	<form action="ScriptAnadirRecopilacionCanciones.php" method="post" class="formulario" style='margin:20pt; background-color:black;color:white;'>
 		<table>
 			<tr>
