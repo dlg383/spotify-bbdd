@@ -8,15 +8,13 @@
 </head>
 <body>
 
-
-
  <div class="sidebar">
    <img src="spotify.png" alt="Spotify" width="100%" height="100">
    <a class="menu" href="Buscador.php">Buscador</a>
    <a class="menu" href="Recopilaciones.php">Recopilaciones</a>
    <a class="menu" href="NuevoArtista.php">Nuevo Artista</a>
    <a class="menu" href="NuevoPodCast.php">Nuevo PodCast</a>
-   <a class="menu" href="NuevaRecopilacionCanciones.php">Nueva Recopilación de Canciones</a>
+   <a class='menu' href="NuevaRecopilacionCanciones.php">Nueva Recopilación de Canciones</a>
    <a class="menu" href="NuevaRecopilacionEpisodios.php">Nueva Recopilación de Episodios</a>
    <a class="menu" href="NuevaTematica.php">Nueva Temática</a>
    <a class="menu" href="Consulta1.php">Número de artistas por temática</a>
