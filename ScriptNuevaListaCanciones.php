@@ -10,9 +10,9 @@
     $idusuario = $_POST['idusuario'];
 	$nombre = $_POST['nombre'];
     if (isset($_POST['privada'])) {
-        $priv = true;
+        $priv = false; // Si se marca la casilla "Privada", la lista no será pública
     }else{
-        $priv = false;
+        $priv = true; // Si no se marca la casilla "Privada", la lista será pública
     }
     echo "<p>". $priv ."</p>";
     $resultado = $mysqli->query("SELECT MAX(id_lista_rep_canciones) as maximo FROM lista_reproduccion_canciones");
@@ -23,7 +23,7 @@
               VALUES ('$newId','$idusuario','$nombre','$priv')";
     $mysqli->query($cadenaSQL);
 
-    if (isset($_POST['canciones'])) {
+    /*if (isset($_POST['canciones'])) {
         $cancionesSeleccionadas = $_POST['canciones'];
 
         foreach ($cancionesSeleccionadas as $cancionId) {
@@ -31,9 +31,9 @@
               VALUES ('$newId','$cancionId')";
             $mysqli->query($insertarCancion);
         }
-    }
+    }*/
   
-    //header("Location: Listas.php?id=". $idusuario);
+    header("Location: Listas.php?id=". $idusuario);
 
     $mysqli->close();
 ?>

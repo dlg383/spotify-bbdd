@@ -16,7 +16,7 @@
         echo "<input type='checkbox' name='privada' id='privada' value='on'>";
         echo "<label for='privada'>Privada</label>";
 
-        $canciones = "SELECT * FROM cancion";
+        /*$canciones = "SELECT * FROM cancion";
         $resultado = $mysqli->query($canciones);
 
         if ($resultado->num_rows>0){
@@ -29,7 +29,7 @@
             echo "<td>" . $fila->titulo . "</td>";
             echo "</tr>";
         }}
-        echo "<table>";
+        echo "<table>";*/
         $mysqli->close();
 ?>
         <table style="width:50%">
