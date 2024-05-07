@@ -9,8 +9,8 @@
 	include_once ('Conexion.php');
 	$idlista = $_POST['idlista'];
   $idcancion = $_POST['idcancion'];
-  $cadenaSQL = "INSERT INTO canciones_de_listas(canciones_idcanciones,listasdereproduccioncanciones_idlistasdereproduccioncanciones)
-              VALUES ('$idcancion','$idlista')";
+  $cadenaSQL = "INSERT INTO lista_reproduccion_canciones_tiene_cancion(id_lista_rep_canciones,id_cancion)
+              VALUES ('$idlista','$idcancion')";
 	echo $cadenaSQL;
   $mysqli->query($cadenaSQL);
   header("Location: Pagina_Cancion.php?idcanciones=". $idcancion);
