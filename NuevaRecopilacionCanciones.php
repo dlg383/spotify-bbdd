@@ -9,7 +9,7 @@
 
 <body>
 
-	<form action="ScriptAnadirRecopilacionCanciones.php" method="post" class="formulario" style='margin:20pt; background-color:black;color:white;'>
+	<form action="ScriptNuevaRecopilacionCanciones.php" method="post" class="formulario" style='margin:20pt; background-color:black;color:white;'>
 		<table>
 			<tr>
 				<td>Nombre:</td>

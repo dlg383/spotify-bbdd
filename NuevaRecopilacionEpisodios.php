@@ -9,7 +9,7 @@
 
 <body>
 
-	<form action="ScriptAnadirRecopilacionEpisodios.php" method="post" class="formulario" style='margin:20pt; background-color:black;color:white;'>
+	<form action="ScriptNuevaRecopilacionEpisodios.php" method="post" class="formulario" style='margin:20pt; background-color:black;color:white;'>
 		<table>
 			<tr>
 				<td>Nombre:</td>
