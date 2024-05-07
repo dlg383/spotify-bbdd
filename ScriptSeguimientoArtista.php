@@ -9,7 +9,7 @@
 	include_once ('Conexion.php');
 	$usuario = $_GET['usuario'];
   $artista =  $_GET['artista'];
-  $cadenaSQL = "INSERT INTO artistas_seguidos (usuarios_idusuarios,artistas_idartistas) VALUES ($usuario,$artista)";
+  $cadenaSQL = "INSERT INTO usuario_sigue_artista(id_usuario,id_artistas) VALUES ($usuario,$artista)";
   $mysqli->query($cadenaSQL);
   header("Location: Pagina_Artista.php?idartistas=". $artista);
 

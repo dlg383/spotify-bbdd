@@ -33,7 +33,7 @@
 		$seguimiento = "SELECT * FROM usuario_sigue_artista WHERE id_artistas='$idartistas' and id_usuario='$idusuarios'";
 		$seguido = $mysqli->query($seguimiento);
 		if ($seguido->num_rows==0){
-		echo "<a href='ScriptSeguimiento.php?usuario=" . $idusuarios . "&artista=" . $idartistas . "' class='menu'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Seguir</button></a><br/>";
+		echo "<a href='ScriptSeguimientoArtista.php?usuario=" . $idusuarios . "&artista=" . $idartistas . "' class='menu'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Seguir</button></a><br/>";
 	  }
 
 		echo "</div>";

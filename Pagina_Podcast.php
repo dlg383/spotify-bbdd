@@ -34,7 +34,7 @@
 		$seguimiento = "SELECT * FROM usuario_sigue_podcast WHERE id_podcast='$idpodcast' and id_usuario='$idusuarios'";
 		$seguido = $mysqli->query($seguimiento);
 		if ($seguido->num_rows==0){
-		echo "<a href='ScriptSeguimiento.php?usuario=" . $idusuarios . "&podcast=" . $idpodcast . "' class='menu'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Seguir</button></a><br/>";
+		echo "<a href='ScriptSeguimientoPodcast.php?usuario=" . $idusuarios . "&podcast=" . $idpodcast . "' class='menu'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Seguir</button></a><br/>";
 	  }
 
 		echo "</div>";
