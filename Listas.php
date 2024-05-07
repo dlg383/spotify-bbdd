@@ -48,7 +48,7 @@
 
 	echo "<hr>";
 	echo "<a class='menu' href='NuevaListaCanciones.php?&usuario=". $id . "'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nueva Lista de Reproducción de Canciones</button></a>";
-  echo "<a class='menu' href='ScriptNuevaListaEpisodios.php?&usuario=". $id . "'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nueva Lista de Reproducción de Episodios</button></a>";
+  echo "<a class='menu' href='NuevaListaEpisodios.php?&usuario=". $id . "'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nueva Lista de Reproducción de Episodios</button></a>";
   echo "</div>";
 
 
