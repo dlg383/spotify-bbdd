@@ -89,7 +89,7 @@
 		while ($fila = $rlistasdereproduccionepisodios->fetch_object()) {
 			echo "<tr>";
 			echo "<td><a class='menu' href='ListaReproduccionEpisodios.php?idlista=" .
-			$fila->id_lista_rep_canciones . "&nombre=" . $fila->nombre . "&publica=" . $fila->publica . "'><b>" . $fila->nombre . "</b></a></td>";
+			$fila->id_lista_rep_episodios . "&nombre=" . $fila->nombre . "&publica=" . $fila->publica . "'><b>" . $fila->nombre . "</b></a></td>";
 		}
 		echo "</table>";
 	}
