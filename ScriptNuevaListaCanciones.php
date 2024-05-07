@@ -10,7 +10,7 @@
     $idusuario = $_POST['idusuario'];
 	$nombre = $_POST['nombre'];
     if (isset($_POST['privada'])) {
-        $priv = false; // Si se marca la casilla "Privada", la lista no será pública
+        $priv = 0; // Si se marca la casilla "Privada", la lista no será pública
     }else{
         $priv = true; // Si no se marca la casilla "Privada", la lista será pública
     }
