@@ -27,7 +27,17 @@
   echo "<p><b> Duración: " . $fila->duracion . "</b></p>";
 
   if ($_SESSION['type'] == 'usuario') {
-    echo "<a href='ScriptMeGustaEpisodio.php?idusuario=" . $id . "&idepisodio=" . $idepisodio . "' class='menu'><button style='width:100%; background-color:green;color:white;'>Me Gusta</button></a><br/>";
+
+    $megusta = "SELECT * FROM usuario_likes_episodio WHERE id_usuario = '$id' and id_episodio = $idepisodio";
+    $result = $mysqli->query($megusta);
+    $f = $result->fetch_object();
+
+    if($f->id_usuario == $id){
+      echo "<button style='width:100%; background-color:green;color:white;' disabled>Ya le has dado me gusta a esta canción</button>";
+    }else{
+      echo "<a href='ScriptMeGustaEpisodio.php?idusuario=" . $id . "&idepisodio=" . $idepisodio . "' class='menu'><button style='width:100%; background-color:green;color:white;'>Me Gusta</button></a><br/>";  
+    }
+    
 
     echo "<form action='ScriptAnadirListaEpisodios.php' method='post' class=formulario>";
     $listas = "SELECT * FROM lista_reproduccion_episodios WHERE id_usuario='$id'";
