@@ -42,12 +42,12 @@
 
 
   $episodios = "SELECT *, epi.descripcion as descrip FROM episodio as epi INNER JOIN podcast as pod WHERE pod.id_podcast = '$idpodcast'
-  and epi.id_podcast = pod.id_podcast ORDER BY epi.num_reproducciones";
+  and epi.id_podcast = pod.id_podcast ORDER BY epi.num_reproducciones DESC";
   $resultado2 = $mysqli->query($episodios);
   $count = 1;
   if ($resultado2->num_rows>0){
 		echo "<hr>";
-    echo "<p style='font-size:30px; '><b>Episodios Más Escuchadas</b></p>";
+    echo "<p style='font-size:30px; '><b>Episodios Más Escuchados</b></p>";
 	  echo "<table style='width:100%'>";
     while ($fila2 = $resultado2->fetch_object() and $count<=5) {
 		echo "<tr>";

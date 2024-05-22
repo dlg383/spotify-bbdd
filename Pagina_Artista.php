@@ -41,7 +41,7 @@
 
 
   $canciones = "SELECT *, can.titulo as titulocancion FROM cancion as can INNER JOIN album as alb WHERE alb.id_artista = '$idartistas'
-  and can.id_album = alb.id_album ORDER BY can.num_reproducciones";
+  and can.id_album = alb.id_album ORDER BY can.num_reproducciones DESC";
   $resultado2 = $mysqli->query($canciones);
   $count = 1;
   if ($resultado2->num_rows>0){
