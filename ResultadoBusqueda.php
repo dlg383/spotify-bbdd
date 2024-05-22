@@ -64,6 +64,18 @@
 		echo "</table>";
 	}
 
+	$bepisodio = "SELECT * FROM episodio WHERE descripcion LIKE '%$busqueda%'";
+	$repisodio = $mysqli->query($bepisodio);
+	if ($repisodio->num_rows>0){
+		echo "<hr>";
+		echo "<p style='font-size:30px; '><b>Episodios</b></p>";
+		echo "<table style='width:100%'>";
+		while ($fila = $repisodio->fetch_object()) {
+			echo "<tr>";
+			echo "<td><a class='menu' href='Pagina_Episodio.php?idepisodio=" . $fila->id_episodio . "'><b>" . $fila->descripcion . "</b></a></td>";
+		}
+		echo "</table>";
+	}
 
 	$blistasdereproduccioncanciones = "SELECT * FROM lista_reproduccion_canciones WHERE nombre LIKE '%$busqueda%' and publica";
 	$rlistasdereproduccioncanciones = $mysqli->query($blistasdereproduccioncanciones);

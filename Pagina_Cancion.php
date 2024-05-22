@@ -11,6 +11,7 @@
   <?php
   include_once('Conexion.php');
   $idcanciones = $_GET['idcanciones'];
+  include("ScriptIngresosCancion.php");
   session_start();
 
   $id = $_SESSION['id'];
@@ -31,7 +32,7 @@
     $result = $mysqli->query($megusta);
     $f = $result->fetch_object();
 
-    if($f->id_usuario == $id){
+    if($f !== null && $f->id_usuario == $id){
       echo "<button style='width:100%; background-color:green;color:white;' disabled>Ya le has dado me gusta a esta canción</button>";
     }else{
       echo "<a href='ScriptMeGustaCancion.php?idusuario=" . $id . "&idcancion=" . $idcanciones . "' class='menu'><button style='width:100%; background-color:green;color:white;'>Me Gusta</button></a><br/>";
