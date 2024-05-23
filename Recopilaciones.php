@@ -49,8 +49,8 @@
 
 
 	echo "<hr>";
-	// echo "<a class='menu' href='ScriptNuevaRecopilacionCanciones.php?&usuario=" . $id . "'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nueva Recopilación de Canciones</button></a>";
-	// echo "<a class='menu' href='ScriptNuevaRecopilacionEpisodios.php?&usuario=" . $id . "'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nueva Recopilación de Episodios</button></a>";
+	echo "<a class='menu' href='NuevaRecopilacionCanciones.php?&admin=" . $id . "'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nueva Recopilación de Canciones</button></a>";
+	echo "<a class='menu' href='NuevaRecopilacionEpisodios.php?&admin=" . $id . "'><button style='width:100%; margin:10pt;  background-color:green;color:white;'>Nueva Recopilación de Episodios</button></a>";
 	echo "</div>";
 
 

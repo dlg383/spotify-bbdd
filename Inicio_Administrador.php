@@ -14,8 +14,6 @@
    <a class="menu" href="Recopilaciones.php">Recopilaciones</a>
    <a class="menu" href="NuevoArtista.php">Nuevo Artista</a>
    <a class="menu" href="NuevoPodCast.php">Nuevo PodCast</a>
-   <a class='menu' href="NuevaRecopilacionCanciones.php">Nueva Recopilación de Canciones</a>
-   <a class="menu" href="NuevaRecopilacionEpisodios.php">Nueva Recopilación de Episodios</a>
    <a class="menu" href="NuevaTematica.php">Nueva Temática</a>
    <a class="menu" href="Consulta1.php">Número de artistas por temática</a>
    <a class="menu" href="Consulta2.php">Número de podcasts por temática</a>

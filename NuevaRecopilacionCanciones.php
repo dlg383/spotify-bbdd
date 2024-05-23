@@ -26,7 +26,7 @@
 			<tr>
 				<td><input type="hidden" name="idadmin" value="
 				<?php
-				$idadmin = $_SESSION['id'];
+				$idadmin = $_GET['admin'];
 				echo $idadmin; ?>" /></td>
 			</tr>
 			<tr>
