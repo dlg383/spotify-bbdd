@@ -11,12 +11,12 @@
   <?php
   include_once('Conexion.php');
   $idcanciones = $_GET['idcanciones'];
-
+  session_start();
   if($_SESSION['type'] == 'usuario'){
     include("ScriptIngresosCancion.php");
   }
   
-  session_start();
+  
 
   $id = $_SESSION['id'];
   $cancion = "SELECT * FROM cancion WHERE id_cancion='$idcanciones'";
