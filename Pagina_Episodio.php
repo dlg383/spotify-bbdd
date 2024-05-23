@@ -11,7 +11,11 @@
   <?php
   include_once('Conexion.php');
   $idepisodio = $_GET['idepisodio'];
-  include("ScriptIngresosEpisodio.php");
+
+  if($_SESSION['type'] == 'usuario'){
+    include("ScriptIngresosEpisodio.php");
+  }
+  
   session_start();
 
   $id = $_SESSION['id'];

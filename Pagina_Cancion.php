@@ -11,7 +11,11 @@
   <?php
   include_once('Conexion.php');
   $idcanciones = $_GET['idcanciones'];
-  include("ScriptIngresosCancion.php");
+
+  if($_SESSION['type'] == 'usuario'){
+    include("ScriptIngresosCancion.php");
+  }
+  
   session_start();
 
   $id = $_SESSION['id'];
