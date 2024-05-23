@@ -46,7 +46,7 @@
 
 
   $episodios = "SELECT *, epi.descripcion as descripcionepisodio FROM episodio as epi INNER JOIN podcast as pod WHERE pod.id_podcast = '$idpodcast'
-  and epi.id_podcast = pod.id_podcast ORDER BY epi.num_reproducciones";
+  and epi.id_podcast = pod.id_podcast ORDER BY epi.num_reproducciones DESC";
   $resultado2 = $mysqli->query($episodios);
   $count = 1;
   if ($resultado2->num_rows>0){

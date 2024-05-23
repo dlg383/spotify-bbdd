@@ -16,7 +16,7 @@
   echo "<td><b> Número de Artistas </b></td>";
   echo "<td><b> Temática </b></td>";
   echo "</tr>";
-  $tematicas = "SELECT COUNT(*) as total, t.nombre FROM spotify.artistas as ar INNER JOIN spotify.tematica as t WHERE ar.tematica_idtematica = t.idtematica GROUP BY t.idtematica";
+  $tematicas = "SELECT COUNT(*) as total, t.nombre FROM lopezgavriloaie.artista as ar INNER JOIN lopezgavriloaie.tematica as t WHERE ar.id_tematica = t.id_tematica GROUP BY t.id_tematica";
   $resultado = $mysqli->query($tematicas);
 
   while ($fila = $resultado->fetch_object()){
