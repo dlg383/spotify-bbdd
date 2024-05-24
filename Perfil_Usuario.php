@@ -68,8 +68,13 @@
 
 
 	$usuario = $fila->id_usuario;
-  $canciones ="SELECT * FROM cancion as can INNER JOIN usuario_likes_cancion as gcan INNER JOIN album as alb WHERE gcan.id_usuario=$usuario
-	and can.id_cancion = gcan.id_cancion and alb.id_album = can.id_album";
+  $canciones ="SELECT can.titulo, can.id_cancion, al.imagen_portada 
+				FROM (
+					SELECT * FROM usuario_likes_cancion as mg where mg.id_usuario = 0
+				) as mg
+				INNER JOIN cancion as can INNER JOIN album as al 
+				WHERE mg.id_cancion = can.id_cancion 
+				AND can.id_album = al.id_album";
   $resultado4 = $mysqli->query($canciones);
   if ($resultado4->num_rows>0){
 		echo "<hr>";
