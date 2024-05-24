@@ -12,51 +12,32 @@
   echo "<b> Número de apariciones de canciones en listas y recopilatorios </b>";
   echo "<br/>";
   echo "<table style='width:100%'>";
-  echo "<tr><td><b> APARICIONES EN LISTAS</b></td><tr>";
   echo "<tr>";
   echo "<td><b> Nombre de la cancion </b></td>";
   echo "<td><b> Número de apariciones en listas</b></td>";
+  echo "<td><b> Número de apariciones en recopilaciones</b></td>";
   echo "</tr>";
-  $lista = "SELECT cuenta.titulo, COUNT(cuenta.id_lista_rep_canciones) as cont
-            FROM (
-                SELECT can.id_cancion, can.titulo, lista.id_lista_rep_canciones
-                FROM cancion as can
-                INNER JOIN lista_reproduccion_canciones_tiene_cancion as lista
-                WHERE can.id_cancion = lista.id_cancion
-            ) as cuenta
-            GROUP BY cuenta.titulo;";
+  $consulta =  "SELECT can.titulo, num_apariciones_lista.num_apariciones AS num_apariciones_lista, num_apariciones_rec.num_apariciones AS num_apariciones_rec
+                FROM (
+                      SELECT c.titulo, c.id_cancion, COUNT(lista.id_cancion) as num_apariciones
+                      FROM lista_reproduccion_canciones_tiene_cancion lista
+                      RIGHT JOIN cancion c ON lista.id_cancion = c.id_cancion
+                      GROUP BY c.id_cancion) AS num_apariciones_lista
+                JOIN (
+                      SELECT c.titulo, c.id_cancion, COUNT(rec.id_cancion) as num_apariciones
+                      FROM recopilacion_canciones_tiene_cancion rec
+                      RIGHT JOIN cancion c ON rec.id_cancion = c.id_cancion
+                      GROUP BY c.id_cancion) AS num_apariciones_rec 
+                      ON num_apariciones_lista.id_cancion = num_apariciones_rec.id_cancion
+                JOIN cancion can ON num_apariciones_rec.id_cancion = can.id_cancion";
 
-  $resultado = $mysqli->query($lista);
+  $resultado = $mysqli->query($consulta);
 
    while ($fila = $resultado->fetch_object()){
     echo "<tr>";
     echo "<td><b>" . $fila->titulo . "</b></td>";
-    echo "<td><b>" . $fila->cont . "</b></td>";
+    echo "<td><b>" . $fila->num_apariciones_lista . "</b></td>";
+    echo "<td><b>" . $fila->num_apariciones_rec . "</b></td>";
     echo "</tr>";
   }
-
-  echo "<tr><td><b> APARICIONES EN RECOPILACIONES</b></td><tr>";
-   echo "<tr>";
-   echo "<td><b> Nombre de la cancion </b></td>";
-   echo "<td><b> Número de apariciones en recopilaciones</b></td>";
-   echo "</tr>";
-
-   $reco = "SELECT cuenta.titulo, COUNT(cuenta.id_recopilacion_canciones) as cont
-            FROM (
-                SELECT can.id_cancion, can.titulo, reco.id_recopilacion_canciones
-                FROM cancion as can
-                INNER JOIN recopilacion_canciones_tiene_cancion as reco
-                WHERE can.id_cancion = reco.id_cancion
-            ) as cuenta
-            GROUP BY cuenta.titulo;";
-    
-    $resultado2 = $mysqli->query($reco);
-
-  while ($fila2 = $resultado2->fetch_object()){
-     echo "<tr>";
-     echo "<td><b>" . $fila2->titulo . "</b></td>";
-     echo "<td><b>" . $fila2->cont . "</b></td>";
-     echo "</tr>";
-   }
-
    echo "</table>";

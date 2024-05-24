@@ -12,51 +12,33 @@
   echo "<b> Número de apariciones de episodios en listas y recopilatorios </b>";
   echo "<br/>";
   echo "<table style='width:100%'>";
-  echo "<tr><td><b> APARICIONES EN LISTAS</b></td><tr>";
   echo "<tr>";
   echo "<td><b> Descripción del episodio </b></td>";
   echo "<td><b> Número de apariciones en listas</b></td>";
+  echo "<td><b> Número de apariciones en recopilaciones</b></td>";
   echo "</tr>";
-  $lista = "SELECT cuenta.descripcion, COUNT(cuenta.id_lista_rep_episodios) as cont
-            FROM (
-                SELECT epi.id_episodio, epi.descripcion, lista.id_lista_rep_episodios
-                FROM episodio as epi
-                INNER JOIN lista_reproduccion_episodios_tiene_episodio as lista
-                WHERE epi.id_episodio = lista.id_episodio
-            ) as cuenta
-            GROUP BY cuenta.descripcion;";
+  $consulta =  "SELECT epis.descripcion, num_apariciones_lista.num_apariciones AS num_apariciones_lista, num_apariciones_rec.num_apariciones AS num_apariciones_rec
+                FROM (SELECT ep.descripcion, ep.id_episodio, COUNT(lista.id_episodio) as num_apariciones
+                      FROM lista_reproduccion_episodios_tiene_episodio lista
+                      RIGHT JOIN episodio ep ON lista.id_episodio = ep.id_episodio
+                      GROUP BY ep.id_episodio) AS num_apariciones_lista
+                JOIN (
+                      SELECT ep.descripcion, ep.id_episodio, COUNT(rec.id_episodio) as num_apariciones
+                      FROM recopilacion_episodios_tiene_episodio rec
+                      RIGHT JOIN episodio ep ON rec.id_episodio = ep.id_episodio
+                      GROUP BY ep.id_episodio) AS num_apariciones_rec 
+                      ON num_apariciones_lista.id_episodio = num_apariciones_rec.id_episodio
+                JOIN episodio epis ON num_apariciones_rec.id_episodio = epis.id_episodio;";
 
-  $resultado = $mysqli->query($lista);
+  $resultado = $mysqli->query($consulta);
 
    while ($fila = $resultado->fetch_object()){
     echo "<tr>";
     echo "<td style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'><b>" . $fila->descripcion . "</b></td>";
-    echo "<td><b style='margin-left: 30px;'>" . $fila->cont . "</b></td>";
+    echo "<td><b style='margin-left: 30px;'>" . $fila->num_apariciones_lista . "</b></td>";
+    echo "<td><b style='margin-left: 30px;'>" . $fila->num_apariciones_rec . "</b></td>";
+
     echo "</tr>";
   }
-
-  echo "<tr><td><b> APARICIONES EN RECOPILACIONES</b></td><tr>";
-   echo "<tr>";
-   echo "<td><b> Descripción del episodio </b></td>";
-   echo "<td><b> Número de apariciones en recopilaciones</b></td>";
-   echo "</tr>";
-
-   $reco = "SELECT cuenta.descripcion, COUNT(cuenta.id_recopilacion_episodios) as cont
-            FROM (
-                SELECT epi.id_episodio, epi.descripcion, reco.id_recopilacion_episodios
-                FROM episodio as epi
-                INNER JOIN recopilacion_episodios_tiene_episodio as reco
-                WHERE epi.id_episodio = reco.id_episodio
-            ) as cuenta
-            GROUP BY cuenta.descripcion;";
-    
-    $resultado2 = $mysqli->query($reco);
-
-  while ($fila2 = $resultado2->fetch_object()){
-     echo "<tr>";
-     echo "<td style='max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'><b>" . $fila2->descripcion . "</b></td>";
-     echo "<td><b  style='margin-left: 30px;'>" . $fila2->cont . "</b></td>";
-     echo "</tr>";
-   }
 
    echo "</table>";

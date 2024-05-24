@@ -15,8 +15,6 @@
   if($_SESSION['type'] == 'usuario'){
     include("ScriptIngresosCancion.php");
   }
-  
-  
 
   $id = $_SESSION['id'];
   $cancion = "SELECT * FROM cancion WHERE id_cancion='$idcanciones'";
