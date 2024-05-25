@@ -70,7 +70,7 @@
 	$usuario = $fila->id_usuario;
   $canciones ="SELECT can.titulo, can.id_cancion, al.imagen_portada 
 				FROM (
-					SELECT * FROM usuario_likes_cancion as mg where mg.id_usuario = 0
+					SELECT * FROM usuario_likes_cancion as mg where mg.id_usuario = $usuario
 				) as mg
 				INNER JOIN cancion as can INNER JOIN album as al 
 				WHERE mg.id_cancion = can.id_cancion 
